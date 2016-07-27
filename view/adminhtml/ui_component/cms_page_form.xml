@@ -17,7 +17,7 @@
         <field name="schedule_from">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
-                    <item name="label" xsi:type="string" translate="true">From</item>
+                    <item name="label" xsi:type="string" translate="true">Page active from</item>
                     <item name="dataType" xsi:type="string">text</item>
                     <item name="formElement" xsi:type="string">date</item>
                     <item name="source" xsi:type="string">page</item>
@@ -31,7 +31,7 @@
         <field name="schedule_to">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
-                    <item name="label" xsi:type="string" translate="true">To</item>
+                    <item name="label" xsi:type="string" translate="true">Page active until</item>
                     <item name="dataType" xsi:type="string">text</item>
                     <item name="formElement" xsi:type="string">date</item>
                     <item name="source" xsi:type="string">page</item>

@@ -6,6 +6,17 @@ use Magento\Framework\Event\ObserverInterface;
 
 class PageObserver implements ObserverInterface
 {
+    /** @var \Magento\Framework\Stdlib\DateTime\Filter\Date $dateFilter */
+    protected $dateFilter;
+
+    /**
+     * @param \Magento\Framework\Stdlib\DateTime\Filter\Date $dateFilter
+     */
+    public function __construct(\Magento\Framework\Stdlib\DateTime\Filter\Date $dateFilter)
+    {
+        $this->dateFilter = $dateFilter;
+    }
+
     /**
      * Filter scheduled_from and scheduled_to dates
      *
@@ -14,14 +25,12 @@ class PageObserver implements ObserverInterface
      */
     public function execute(\Magento\Framework\Event\Observer $observer)
     {
-        $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
-        $dateFilter = $objectManager->get('Magento\Framework\Stdlib\DateTime\Filter\Date');
         $filterRules = [];
         $data = $observer->getPage()->getData();
 
         foreach (['schedule_from', 'schedule_to'] as $dateField) {
             if (!empty($data[$dateField])) {
-                $filterRules[$dateField] = $dateFilter;
+                $filterRules[$dateField] = $this->dateFilter;
             }
         }
 
