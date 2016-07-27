@@ -3,18 +3,19 @@
 namespace CatalinMoiceanu\ScheduledPages\Observer\Cms;
 
 use Magento\Framework\Event\ObserverInterface;
+use CatalinMoiceanu\ScheduledPages\Helper\Page;
 
 class PageObserver implements ObserverInterface
 {
-    /** @var \Magento\Framework\Stdlib\DateTime\Filter\Date $dateFilter */
-    protected $dateFilter;
+    /** @var \CatalinMoiceanu\ScheduledPages\Model\PostDataProcessor $postDataProcessor */
+    protected $postDataProcessor;
 
     /**
-     * @param \Magento\Framework\Stdlib\DateTime\Filter\Date $dateFilter
+     * @param \CatalinMoiceanu\ScheduledPages\Model\PostDataProcessor $postDataProcessor
      */
-    public function __construct(\Magento\Framework\Stdlib\DateTime\Filter\Date $dateFilter)
+    public function __construct(\CatalinMoiceanu\ScheduledPages\Model\PostDataProcessor $postDataProcessor)
     {
-        $this->dateFilter = $dateFilter;
+        $this->postDataProcessor = $postDataProcessor;
     }
 
     /**
@@ -25,17 +26,15 @@ class PageObserver implements ObserverInterface
      */
     public function execute(\Magento\Framework\Event\Observer $observer)
     {
-        $filterRules = [];
-        $data = $observer->getPage()->getData();
+        $page = $observer->getEvent()->getPage();
 
-        foreach (['schedule_from', 'schedule_to'] as $dateField) {
-            if (!empty($data[$dateField])) {
-                $filterRules[$dateField] = $this->dateFilter;
-            }
-        }
+        $filteredData = $this->postDataProcessor->filter([
+            Page::KEY_SCHEDULE_FROM => $page->getData(Page::KEY_SCHEDULE_FROM),
+            Page::KEY_SCHEDULE_TO => $page->getData(Page::KEY_SCHEDULE_TO)
+        ]);
 
-        $data = (new \Zend_Filter_Input($filterRules, [], $data))->getUnescaped();
-        $observer->getPage()->setData($data);
+        $page->setData(Page::KEY_SCHEDULE_FROM, $filteredData[Page::KEY_SCHEDULE_FROM]);
+        $page->setData(Page::KEY_SCHEDULE_TO, $filteredData[Page::KEY_SCHEDULE_TO]);
 
         return $this;
     }
