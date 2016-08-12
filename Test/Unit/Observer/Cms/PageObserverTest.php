@@ -50,7 +50,7 @@ class PageObserverTest extends \PHPUnit_Framework_TestCase
     /**
      * @group CatalinMoiceanu_ScheduledPages
      */
-    public function testThatIsTrue()
+    public function testPageObserver()
     {
         $this->observerMock
             ->expects($this->atLeastOnce())
