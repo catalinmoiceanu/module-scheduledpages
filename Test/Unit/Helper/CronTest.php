@@ -2,8 +2,6 @@
 
 namespace CatalinMoiceanu\ScheduledPages\Test\Unit\Helper;
 
-use Magento\Framework\TestFramework\Unit\Helper\ObjectManager;
-
 class CronTest extends \PHPUnit_Framework_TestCase
 {
     /**
