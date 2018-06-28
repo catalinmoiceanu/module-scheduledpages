@@ -12,8 +12,8 @@ class PostDataProcessor
     protected $dateFilter;
 
     /**
-     * PostDataProcessor constructor
-     * 
+     * PostDataProcessor constructor.
+     *
      * @param \Magento\Framework\Stdlib\DateTime\Filter\Date $dateFilter
      */
     public function __construct(\Magento\Framework\Stdlib\DateTime\Filter\Date $dateFilter)
@@ -23,6 +23,7 @@ class PostDataProcessor
 
     /**
      * @param array $data
+     *
      * @return array
      */
     public function filter($data)

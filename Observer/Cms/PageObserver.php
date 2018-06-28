@@ -2,8 +2,8 @@
 
 namespace CatalinMoiceanu\ScheduledPages\Observer\Cms;
 
-use Magento\Framework\Event\ObserverInterface;
 use CatalinMoiceanu\ScheduledPages\Helper\Page;
+use Magento\Framework\Event\ObserverInterface;
 
 class PageObserver implements ObserverInterface
 {
@@ -19,9 +19,10 @@ class PageObserver implements ObserverInterface
     }
 
     /**
-     * Filter scheduled_from and scheduled_to dates
+     * Filter scheduled_from and scheduled_to dates.
      *
      * @param \Magento\Framework\Event\Observer $observer
+     *
      * @return self
      */
     public function execute(\Magento\Framework\Event\Observer $observer)
@@ -30,7 +31,7 @@ class PageObserver implements ObserverInterface
 
         $filteredData = $this->postDataProcessor->filter([
             Page::KEY_SCHEDULE_FROM => $page->getData(Page::KEY_SCHEDULE_FROM),
-            Page::KEY_SCHEDULE_TO => $page->getData(Page::KEY_SCHEDULE_TO)
+            Page::KEY_SCHEDULE_TO   => $page->getData(Page::KEY_SCHEDULE_TO),
         ]);
 
         $page->setData(Page::KEY_SCHEDULE_FROM, $filteredData[Page::KEY_SCHEDULE_FROM]);

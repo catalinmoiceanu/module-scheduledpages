@@ -2,10 +2,10 @@
 
 namespace CatalinMoiceanu\ScheduledPages\Setup;
 
-use Magento\Framework\Setup\InstallSchemaInterface;
-use Magento\Framework\Setup\SchemaSetupInterface;
-use Magento\Framework\Setup\ModuleContextInterface;
 use CatalinMoiceanu\ScheduledPages\Helper\Page;
+use Magento\Framework\Setup\InstallSchemaInterface;
+use Magento\Framework\Setup\ModuleContextInterface;
+use Magento\Framework\Setup\SchemaSetupInterface;
 
 class InstallSchema implements InstallSchemaInterface
 {
@@ -17,11 +17,11 @@ class InstallSchema implements InstallSchemaInterface
             $setup->getTable('cms_page'),
             Page::KEY_SCHEDULE_FROM,
             [
-                'type' => \Magento\Framework\DB\Ddl\Table::TYPE_TIMESTAMP,
+                'type'     => \Magento\Framework\DB\Ddl\Table::TYPE_TIMESTAMP,
                 'unsigned' => true,
                 'nullable' => true,
-                'default' => null,
-                'comment' => 'Page enabled from'
+                'default'  => null,
+                'comment'  => 'Page enabled from',
             ]
         );
 
@@ -29,11 +29,11 @@ class InstallSchema implements InstallSchemaInterface
             $setup->getTable('cms_page'),
             Page::KEY_SCHEDULE_TO,
             [
-                'type' => \Magento\Framework\DB\Ddl\Table::TYPE_TIMESTAMP,
+                'type'     => \Magento\Framework\DB\Ddl\Table::TYPE_TIMESTAMP,
                 'unsigned' => true,
                 'nullable' => true,
-                'default' => null,
-                'comment' => 'Page enabled up until'
+                'default'  => null,
+                'comment'  => 'Page enabled up until',
             ]
         );
 
