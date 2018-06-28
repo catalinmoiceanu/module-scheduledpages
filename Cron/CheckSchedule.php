@@ -4,10 +4,10 @@ namespace CatalinMoiceanu\ScheduledPages\Cron;
 
 class CheckSchedule
 {
-    /** @var  \Magento\Cms\Model\PageFactory $pageFactory */
+    /** @var \Magento\Cms\Model\PageFactory $pageFactory */
     protected $pageFactory;
 
-    /** @var  \CatalinMoiceanu\ScheduledPages\Helper\Cron */
+    /** @var \CatalinMoiceanu\ScheduledPages\Helper\Cron */
     protected $cronHelper;
 
     /**
@@ -16,8 +16,7 @@ class CheckSchedule
     public function __construct(
         \Magento\Cms\Model\PageFactory $pageFactory,
         \CatalinMoiceanu\ScheduledPages\Helper\Cron $cronHelper
-    )
-    {
+    ) {
         $this->pageFactory = $pageFactory;
         $this->cronHelper = $cronHelper;
     }
@@ -32,8 +31,7 @@ class CheckSchedule
     {
         $collection = $this->getCollection();
         $this->cronHelper->filterPagesThatShouldBeInactive($collection);
-        foreach ($collection as $page)
-        {
+        foreach ($collection as $page) {
             $this->cronHelper->updatePageStatus($page, false);
         }
     }
@@ -42,8 +40,7 @@ class CheckSchedule
     {
         $collection = $this->getCollection();
         $this->cronHelper->filterPagesThatShouldBeActive($collection);
-        foreach ($collection as $page)
-        {
+        foreach ($collection as $page) {
             $this->cronHelper->updatePageStatus($page, true);
         }
     }
@@ -55,6 +52,7 @@ class CheckSchedule
     {
         $page = $this->pageFactory->create();
         $collection = $page->getCollection();
+
         return $collection;
     }
 }

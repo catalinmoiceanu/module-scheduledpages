@@ -64,8 +64,8 @@ class PageObserverTest extends \PHPUnit_Framework_TestCase
             ->expects($this->any())
             ->method('getData')
             ->willReturn([
-                'schedule_from' =>'04/18/1989',
-                'schedule_to' =>'04/18/2089',
+                'schedule_from' => '04/18/1989',
+                'schedule_to'   => '04/18/2089',
             ]);
 
         $this->assertEquals($this->observer, $this->observer->execute($this->observerMock));

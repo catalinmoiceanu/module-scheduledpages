@@ -42,7 +42,7 @@ class CronTest extends \PHPUnit_Framework_TestCase
             ->getMock();
         $this->objectMock = $this
             ->getMockBuilder('CatalinMoiceanu\ScheduledPages\Helper\Cron')
-            ->setConstructorArgs(array($this->contextMock))
+            ->setConstructorArgs([$this->contextMock])
             ->setMethods(null)
             ->getMock();
         $this->pageMock = $this
@@ -86,7 +86,6 @@ class CronTest extends \PHPUnit_Framework_TestCase
         $this->objectMock->updatePageStatus($this->pageMock, $expectedStatus);
 
         $this->assertEquals($expectedStatus, $this->pageMock->getIsActive());
-
     }
 
     /**
@@ -95,16 +94,15 @@ class CronTest extends \PHPUnit_Framework_TestCase
     public function getStatusDataProvider()
     {
         return [
-            [ 1 ],
-            [ 0 ],
-            [ 1 ],
-            [ 1 ],
-            [ 0 ],
-            [ 1 ],
-            [ 1 ],
+            [1],
+            [0],
+            [1],
+            [1],
+            [0],
+            [1],
+            [1],
         ];
     }
-
 
     /**
      * @group CatalinMoiceanu_ScheduledPages

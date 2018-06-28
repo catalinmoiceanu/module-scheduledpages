@@ -41,7 +41,7 @@ class CheckScheduleTest extends \PHPUnit_Framework_TestCase
             ->getMock();
         $this->objectMock = $this
             ->getMockBuilder('CatalinMoiceanu\ScheduledPages\Cron\CheckSchedule')
-            ->setConstructorArgs(array($this->pageFactoryMock, $this->cronHelperMock))
+            ->setConstructorArgs([$this->pageFactoryMock, $this->cronHelperMock])
             ->getMock();
         $this->pageMock = $this
             ->getMockBuilder('Magento\Cms\Model\Page')
@@ -79,7 +79,8 @@ class CheckScheduleTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @param string $method
-     * @param array $parameters
+     * @param array  $parameters
+     *
      * @return mixed
      */
     protected function invokeProtectedMethod($method, $parameters = [])
@@ -87,6 +88,7 @@ class CheckScheduleTest extends \PHPUnit_Framework_TestCase
         $reflection = new \ReflectionClass(get_class($this->objectMock));
         $method = $reflection->getMethod($method);
         $method->setAccessible(true);
+
         return $method->invokeArgs($this->objectMock, $parameters);
     }
 }

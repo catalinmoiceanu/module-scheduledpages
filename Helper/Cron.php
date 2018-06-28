@@ -11,6 +11,7 @@ class Cron extends \Magento\Framework\App\Helper\AbstractHelper
 
     /**
      * Cron constructor.
+     *
      * @param Context $context
      */
     public function __construct(Context $context)
@@ -21,7 +22,7 @@ class Cron extends \Magento\Framework\App\Helper\AbstractHelper
 
     /**
      * @param \Magento\Cms\Model\Page $page
-     * @param bool $state
+     * @param bool                    $state
      */
     public function updatePageStatus(\Magento\Cms\Model\Page $page, $state)
     {
@@ -34,10 +35,10 @@ class Cron extends \Magento\Framework\App\Helper\AbstractHelper
      */
     public function filterPagesThatShouldBeInactive(\Magento\Cms\Model\ResourceModel\Page\Collection $collection)
     {
-        $fields = [ Page::KEY_SCHEDULE_FROM, Page::KEY_SCHEDULE_TO ];
+        $fields = [Page::KEY_SCHEDULE_FROM, Page::KEY_SCHEDULE_TO];
         $condition = [
-            [ 'gteq' => $this->now ],
-            [ 'lteq' => $this->now ]
+            ['gteq' => $this->now],
+            ['lteq' => $this->now],
         ];
         $collection->addFieldToFilter($fields, $condition);
     }
@@ -52,15 +53,15 @@ class Cron extends \Magento\Framework\App\Helper\AbstractHelper
 
         $columnScheduleFrom = $adapter->quoteIdentifier(Page::KEY_SCHEDULE_FROM);
         $columnScheduleTo = $adapter->quoteIdentifier(Page::KEY_SCHEDULE_TO);
-        $sqlFromLessThan = $adapter->quoteInto($columnScheduleFrom . " <= ?", $this->now);
-        $sqlFromIsNull = $adapter->quote($columnScheduleFrom . " IS NULL");
-        $sqlToGreaterThan = $adapter->quoteInto($columnScheduleTo . " >= ?", $this->now);
-        $sqlToIsNull = $adapter->quote($columnScheduleTo . " IS NULL");
+        $sqlFromLessThan = $adapter->quoteInto($columnScheduleFrom.' <= ?', $this->now);
+        $sqlFromIsNull = $adapter->quote($columnScheduleFrom.' IS NULL');
+        $sqlToGreaterThan = $adapter->quoteInto($columnScheduleTo.' >= ?', $this->now);
+        $sqlToIsNull = $adapter->quote($columnScheduleTo.' IS NULL');
 
         $select
-            ->orWhere($sqlFromLessThan . " AND " . $sqlToGreaterThan)
-            ->orWhere($sqlFromLessThan . " AND " . $sqlToIsNull)
-            ->orWhere($sqlFromIsNull . " AND " . $sqlToGreaterThan)
-            ->orWhere($sqlFromIsNull . " AND " . $sqlToIsNull);
+            ->orWhere($sqlFromLessThan.' AND '.$sqlToGreaterThan)
+            ->orWhere($sqlFromLessThan.' AND '.$sqlToIsNull)
+            ->orWhere($sqlFromIsNull.' AND '.$sqlToGreaterThan)
+            ->orWhere($sqlFromIsNull.' AND '.$sqlToIsNull);
     }
 }
